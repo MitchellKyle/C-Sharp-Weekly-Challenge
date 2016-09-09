@@ -34,7 +34,16 @@ namespace CodeLou.CSharp.Week2.Challenge
             // If the result is true, write "Please enter a positive number." to the console.
             // Hint: The input that you captured is currently a string type. You will have to "parse" it
             //       as a different type in order to pass it to the IsLessThanOrEqualToZero function.
-            var numberOfSeconds = int.Parse(stringOfSeconds);
+            int numberOfSeconds = 0;
+            try
+            {
+                numberOfSeconds = int.Parse(stringOfSeconds);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please enter a whole number.");
+            }
+
             if (IsLessThanOrEqualToZero(numberOfSeconds))
             {
                 Console.Write("Please enter a positive number.");
@@ -50,10 +59,19 @@ namespace CodeLou.CSharp.Week2.Challenge
             //       to learn more about loops, visit https://msdn.microsoft.com/en-us/library/32dbftby.aspx.
             else
             {
-                while (numberOfSeconds > 0)
+            // This was my way of solving the problem. Works fine, I did learn however, that doing it this way
+            // can have some risky behavior later in the code. Trying to reuse the numberOfSeconds variable
+            // later can cause unexpected results, because after running through the while loop, numberOfSeconds
+            // is now equal to 0 instead of the parsed user entry.
+                //while (numberOfSeconds > 0)
+                //{
+                //    Console.Write(numberOfSeconds + ", ");
+                //    numberOfSeconds -= 1;
+                //}
+                for (int i = numberOfSeconds; i >= 1; i--)
                 {
-                    Console.Write(numberOfSeconds + ", ");
-                    numberOfSeconds -= 1;
+                    Console.WriteLine(i);
+                    System.Threading.Thread.Sleep(950);
                 }
                 Console.WriteLine("LIFTOFF!");
             }
